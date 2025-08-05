@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+
 
 class User extends Authenticatable
 {
@@ -19,8 +22,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nickname',
         'email',
+        'role',
         'password',
+        'token'
     ];
 
     /**
@@ -30,7 +36,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'token',
     ];
 
     /**
@@ -38,11 +44,33 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
+
+    public function preferences()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Preferences::class . 'user_id');
+    }
+
+    public function preferredGenres()
+    {
+        return $this->belongsToMany(Genders::class, 'preferences_has_genre', 'user_id', 'gender_id');
+    }
+
+    public function starRatings()
+    {
+        return $this->hasMany(ContentStarRatings::class, 'user_id');
+    }
+
+    public function updateRequests()
+    {
+        return $this->hasMany(UpdateRequests::class, 'user_id');
+    }
+
+    public function includeRequests()
+    {
+        return $this->hasMany(IncludeRequests::class, 'user_id');
     }
 }
