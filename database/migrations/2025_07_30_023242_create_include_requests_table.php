@@ -16,11 +16,10 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->text("description");
             $table->enum("status", ['pending', 'in progress', 'adding', 'Completed']);
-            $table->timestamp("date_resolution")->nullable();
-            $table->timestamp("update_at")->nullable();
-            $table->timestamp("delete_at")->nullable();
-            
+            $table->datetime("date_resolution")->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            
         });
     }
 

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("content_star_rates", function(Blueprint $table){
+            
             $table->double("quantity");
 
             $table->foreignId("content_id")->constrained("contents")->onDelete("cascade");

@@ -28,9 +28,9 @@ class UsersSeeder extends Seeder
                 'email' => 'katsu@clocktale.com',
                 'password' => Hash::make('Katsu012@_'),
                 'role' => 'admin',
-                'create_at' => now(),
+                'created_at' => now(),
                 'token' => Str::random(60),
-                'token_expiration' => Carbon::now()->addDays(7),
+                'token_expiration' => Carbon::now()->addDays(15),
             ],
 
             [
@@ -42,7 +42,7 @@ class UsersSeeder extends Seeder
                 'role' => 'admin',
                 'create_at' => now(),
                 'token' => Str::random(60),
-                'token_expiration' => Carbon::now()->addDays(7),
+                'token_expiration' => Carbon::now()->addDays(15),
             ],
 
             [
@@ -54,7 +54,7 @@ class UsersSeeder extends Seeder
                 'role' => 'user',
                 'create_at' => now(),
                 'token' => Str::random(60),
-                'token_expiration' => Carbon::now()->addDays(10),
+                'token_expiration' => Carbon::now()->addDays(15),
             ],
 
             [
@@ -66,7 +66,19 @@ class UsersSeeder extends Seeder
                 'role' => 'user',
                 'create_at' => now(),
                 'token' => Str::random(60),
-                'token_expiration' => Carbon::now()->addDays(10),
+                'token_expiration' => Carbon::now()->addDays(15),
+            ],
+
+            [
+                'profile_picture' => 'profile_picture/default_icon.png',
+                'nickname' => 'Jane_Doe',
+                'name' => 'Jane Doe',
+                'email' => 'jane.doe@clocktale.com',
+                'password' => Hash::make('JaneDoe_12@'),
+                'role' => 'user',
+                'create_at' => now(),
+                'token' => Str::random(60),
+                'token_expiration' => Carbon::now()->addDays(15),
             ],
 
             [
@@ -78,7 +90,7 @@ class UsersSeeder extends Seeder
                 'role' => 'user',
                 'create_at' => now(),
                 'token' => Str::random(60),
-                'token_expiration' => Carbon::now()->addDays(10),
+                'token_expiration' => Carbon::now()->addDays(15),
             ]
         ]);
     }

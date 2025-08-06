@@ -19,11 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->default('user');
-            $table->timestamp("create_at");
-            $table->timestamp("update_at")->nullable();
-            $table->string("token")->nullable();
-            $table->dateTime("token_expiration")->nulable();
             $table->timestamps();
+            $table->string("token")->nullable()->unique();
+            $table->dateTime("token_expiration")->nulable();
+
         });
 
     }
