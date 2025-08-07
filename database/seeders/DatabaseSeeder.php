@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Creators;
+use App\Models\Genders;
+use App\Models\Publishers;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +16,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // \App\Models\User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Uncomment the following lines to seed specific models
+        // $this->call([
+        //     UsersSeeder::class,
+        //     ContentsSeeder::class,
+        //     StreamingsSeeder::class,
+        //     ContentStarRatingsSeeder::class,
+        //     UpdateRequestsSeeder::class,
+        //     IncludeRequestsSeeder::class,
+        // ]);
+
+        $this->call([
+            UsersSeeder::class,
+            PublishersSeeder::class,
+            GendersSeeder::class,
+            CreatorsSeeder::class,
+            StreamingsSeeder::class,
+            ContentsSeeder::class,
         ]);
+        
     }
 }
