@@ -46,32 +46,8 @@ Adicione links ou referências relevantes para esta issue, como telas do Figma, 
 
 ---
 
-## 🚨 Impacto / Dependências
-
-Liste aqui se esta issue possui impacto direto em outras funcionalidades ou depende de outras tasks, PRs ou configurações antes de ser iniciada.
-
-Exemplo:
-
-> Esta issue depende do PR #123 ser aprovado, pois utiliza a nova estrutura de autenticação implementada.
-
----
-
 ## 📝 Notas Técnicas (opcional)
 
 Inclua qualquer detalhe técnico relevante, como sugestões de implementação, endpoints, estruturas de dados, comandos, pacotes necessários ou restrições identificadas.
-
----
-
-## 📸 Anexos / Mockups (opcional)
-
-Adicione aqui imagens, capturas de tela, fluxos ou mockups para ilustrar a tarefa.
-
----
-
-## 👥 Responsáveis
-
-- **Autor:** @<seu-username>
-- **Revisor(es):** @<username(s)-de-revisores>
-- **Testador(es):** @<username(s)-de-testadores> (se aplicável)
 
 ---
