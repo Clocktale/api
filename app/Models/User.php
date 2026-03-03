@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
 
 
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,12 +24,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'nickname',
         'email',
-        'role',
+        'profile_picture',
         'password',
-        'token'
     ];
 
     /**
@@ -36,22 +38,12 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected $casts = [
-        'password' => 'hashed',
     ];
 
 
     public function preferences()
     {
-        return $this->hasOne(Preferences::class . 'user_id');
+        return $this->hasOne(Preferences::class, 'user_id');
     }
 
     public function preferredGenres()
@@ -72,5 +64,10 @@ class User extends Authenticatable
     public function includeRequests()
     {
         return $this->hasMany(IncludeRequests::class, 'user_id');
+    }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class, 'user_id');
     }
 }

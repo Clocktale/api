@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             CreatorsSeeder::class,
             StreamingsSeeder::class,
             ContentsSeeder::class,
+            RoleSeeder::class
         ]);
         
     }

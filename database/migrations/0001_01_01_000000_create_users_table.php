@@ -15,14 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('profile_picture')->default('profile_picture/default.jpeg');
             $table->string('nickname');
-            $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role', ['admin', 'user'])->default('user');
             $table->timestamps();
-            $table->string("token")->nullable()->unique();
-            $table->dateTime("token_expiration")->nulable();
-
         });
 
     }
