@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('creators', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->enum('primary_role', ['author', 'illustrator', 'mangaka']);
+            $table->string("name")->unique();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

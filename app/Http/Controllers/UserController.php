@@ -32,7 +32,13 @@ class UserController extends Controller
 
     public function update(User $user, UpdateUserRequest $request)
     {
-        $this->updateUserService->execute($user, $request);
+        $this->authorize('update', $user);
+        $updated = $this->updateUserService->execute($user, $request);
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user' => $updated
+        ], 200);
     }
 
     public function destroy(User $user, DeleteUserService $deleteUserService)

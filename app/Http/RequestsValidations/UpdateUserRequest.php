@@ -4,6 +4,7 @@ namespace App\Http\RequestsValidations;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 class UpdateUserRequest extends FormRequest
 {
     /**
@@ -24,7 +25,7 @@ class UpdateUserRequest extends FormRequest
                 "sometimes",
                 "required",
                 "email",
-                Rule::unique('users')->ignore($this->user->id),
+                Rule::unique('users', 'email')->ignore($this->user->id),
             ],
             "password" => [
                 "sometimes",

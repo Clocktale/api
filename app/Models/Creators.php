@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Mail\Mailables\Content;
 
 class Creators extends Model
 {
-    protected $primarykey = 'creators_id';
-    protected $fillable = ['name', 'primary_role'];
+    use SoftDeletes;
     
+    protected $fillable = ['name'];
+
     public function contents()
     {
         return $this->belongsToMany(Contents::class, 'contents_creators', 'creator_id', 'content_id');
@@ -25,5 +27,5 @@ class Creators extends Model
         return $this->hasMany(Contents::class, 'id', 'content_id');
     }
 
-    
+
 }
