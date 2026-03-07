@@ -34,6 +34,6 @@ class StudioController extends Controller
     public function destroy(Studio $studio)
     {
         $this->deleteStudioService->execute($studio);
-        return response('', 200); 
+        return response()->json(['message' => 'Deleted studio', 'studio' => $studio], 200); 
     }
 }
