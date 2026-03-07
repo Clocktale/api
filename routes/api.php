@@ -24,10 +24,8 @@ Route::prefix('/v1')->group(function () {
         Route::put('/users/{user}', [UserController::class, 'update']);
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
 
-        Route::post('/authors/test', [AuthorController::class, 'store']);
         //Rotas Administrador
         Route::middleware(['admin'])->prefix('admin')->group(function () {
-
             //Rotas Autores
             Route::post('/authors', [AuthorController::class, 'store']);
             Route::put('/authors/{author}', [AuthorController::class, 'update']);

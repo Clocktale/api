@@ -15,8 +15,8 @@ class AuthorController extends Controller
 
     public function __construct(
         private IAuthorRepository $authorRepository,
-        private CreateAuthorService $createauthorService,
-        private UpdateAuthorService $updateauthorservice,
+        private CreateAuthorService $createaAuthorService,
+        private UpdateAuthorService $updateAuthorService,
         private DeleteAuthorService $deleteAuthorService)
     {
     }
@@ -29,7 +29,7 @@ class AuthorController extends Controller
 
     public function store(AuthorRequest $request)
     {
-        $author = $this->createauthorService->execute($request);
+        $author = $this->createaAuthorService->execute($request);
 
         return response()->json(
             [
@@ -42,7 +42,7 @@ class AuthorController extends Controller
 
     public function update(AuthorRequest $request, Creators $author)
     {
-        $author = $this->updateauthorservice->execute($author, $request);
+        $author = $this->updateAuthorService->execute($author, $request);
 
         return response()->json(
             [
