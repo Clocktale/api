@@ -15,19 +15,19 @@ Route::prefix('/v1')->group(function () {
     //Users_create
     Route::post('/users', [UserController::class, 'store']);
 
+    //Studio create teste
+    Route::post('/studios', [StudioController::class, 'store']);
+
     //Rotas Autenticadas
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
-
         Route::put('/users/{user}', [UserController::class, 'update']);
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
-    });
 
-    //Rotas Administrador
-        Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+        Route::middleware(['admin'])->prefix('admin')->group(function () {
             Route::post('/studios', [StudioController::class, 'store']);
             Route::put('/studios/{studio}', [StudioController::class, 'update']);
             Route::delete('/studios/{studio}', [StudioController::class, 'destroy']);
         });
-
+    });
 });

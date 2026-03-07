@@ -18,7 +18,9 @@ class UpdateStudioService
         // Pega apenas os dados validados ('name')
         $data = $request->validated();
 
+        $studio->fill($data);
+
         // Atualiza e retorna o estúdio (Critério 3)
-        return $this->studioRepository->updateStudio($data);
+        return $this->studioRepository->updateStudio($studio);
     }
 }
