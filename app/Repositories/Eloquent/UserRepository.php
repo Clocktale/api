@@ -26,9 +26,10 @@ class UserRepository implements IUserRepository
         $user->save();
         return $user;
     }
-    public function updateUser(User $user): bool
+    public function updateUser(User $user): User
     {
-        return $user->save();
+        $user->save();
+        return $user;
     }
 
     public function deleteUser(User $user): bool
