@@ -8,4 +8,5 @@ interface IStudioRepository
 {
     public function createStudio(Studio $studio);
     public function updateStudio(Studio $studio);
+    public function deleteStudio(Studio $studio);
 }

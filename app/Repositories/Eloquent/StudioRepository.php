@@ -17,4 +17,8 @@ class StudioRepository implements IStudioRepository
         $studio->update();
         return $studio;
     }
+    public function deleteStudio(Studio $studio): bool
+    {
+        return $studio->delete(); 
+    }
 }

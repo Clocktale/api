@@ -27,6 +27,7 @@ Route::prefix('/v1')->group(function () {
         Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
             Route::post('/studios', [StudioController::class, 'store']);
             Route::put('/studios/{studio}', [StudioController::class, 'update']);
+            Route::delete('/studios/{studio}', [StudioController::class, 'destroy']);
         });
 
 });

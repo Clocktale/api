@@ -9,13 +9,15 @@ use App\Http\RequestsValidations\UpdateStudioRequest;
 use App\Models\Studio;
 use App\Services\Studio\CreateStudioService;
 use App\Services\Studio\UpdateStudioService;
+use App\Services\Studio\DeleteStudioService;
 use Illuminate\Http\JsonResponse;
 
 class StudioController extends Controller
 {
     public function __construct(
         private CreateStudioService $createStudioService,
-        private UpdateStudioService $updateStudioService
+        private UpdateStudioService $updateStudioService,
+        private DeleteStudioService $deleteStudioService
     ) {
     }
 
@@ -28,5 +30,10 @@ class StudioController extends Controller
     {
         $updatedStudio = $this->updateStudioService->execute($studio, $request);
         return response()->json($updatedStudio, 200);
+    }
+    public function destroy(Studio $studio)
+    {
+        $this->deleteStudioService->execute($studio);
+        return response('', 200); 
     }
 }
