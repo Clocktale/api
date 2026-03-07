@@ -5,17 +5,25 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudioController;
 
 Route::prefix('/v1')->group(function () {
 
     //AUTH
     //Rotas Publicas
     Route::post('/auth/login', [AuthController::class, 'login']);
+    //Users_create
     Route::post('/users', [UserController::class, 'store']);
 
     //Rotas Autenticadas
     Route::middleware('auth:sanctum')->group(function () {
         
+        // Supondo que a rota middleware 'admin' esteja feita
+        Route::middleware(['admin'])->group(function () {
+            Route::post('/studios', [StudioController::class, 'store']);
+            Route::put('/studios/{studio}', [StudioController::class, 'update']);
+        });
+
         Route::post('/auth/logout', [AuthController::class, 'logout']);
 
         Route::put('/users/{user}', [UserController::class, 'update']);
