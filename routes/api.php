@@ -17,13 +17,6 @@ Route::prefix('/v1')->group(function () {
 
     //Rotas Autenticadas
     Route::middleware('auth:sanctum')->group(function () {
-        
-        // Supondo que a rota middleware 'admin' esteja feita
-        Route::middleware(['admin'])->group(function () {
-            Route::post('/studios', [StudioController::class, 'store']);
-            Route::put('/studios/{studio}', [StudioController::class, 'update']);
-        });
-
         Route::post('/auth/logout', [AuthController::class, 'logout']);
 
         Route::put('/users/{user}', [UserController::class, 'update']);
@@ -31,8 +24,9 @@ Route::prefix('/v1')->group(function () {
     });
 
     //Rotas Administrador
-    // Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
-
-    // });
+        Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+            Route::post('/studios', [StudioController::class, 'store']);
+            Route::put('/studios/{studio}', [StudioController::class, 'update']);
+        });
 
 });
