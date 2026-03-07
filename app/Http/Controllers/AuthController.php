@@ -19,4 +19,8 @@ class AuthController extends Controller
 
         return $this->success($data, 'Login realizado com sucesso');
     }
+
+    // public function logout(){
+
+    // }
 }
