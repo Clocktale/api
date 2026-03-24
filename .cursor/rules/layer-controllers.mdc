@@ -1,0 +1,51 @@
+---
+description: Regras da camada Controllers (orquestracao)
+globs: app/Http/Controllers/**/*.php
+alwaysApply: false
+---
+
+# Camada Controllers
+
+## Responsavel por
+
+- Receber a requisicao validada (via Request type-hinted).
+- Delegar o processamento para o Service correspondente.
+- Retornar a resposta formatada usando Resources (Responses).
+- Usar os helpers `$this->success()` e `$this->error()` do Controller base para padronizar respostas.
+- Injetar Services e Repository Contracts via construtor.
+
+## NAO responsavel por
+
+- Logica de negocio (isso e do Service).
+- Validacao de campos (isso e do Request).
+- Acesso direto ao banco de dados (isso e do Repository).
+- Transformacao complexa de dados (isso e do Response/Resource).
+
+## Padrao de Resposta
+
+Sempre usar os helpers herdados do Controller base (`App\Http\Controllers\Controller`):
+
+```php
+// Sucesso
+return $this->success($data, 'Mensagem de sucesso', 200);
+
+// Erro
+return $this->error('Mensagem de erro', 400, $errors);
+```
+
+## Injecao de Dependencias
+
+- Injetar Services e Contracts (interfaces) pelo construtor.
+- NUNCA injetar implementacoes concretas de repositorios; usar sempre a interface (Contract).
+
+```php
+public function __construct(
+    private CreateUserService $createUserService,
+    private IUserRepository $userRepository
+) {}
+```
+
+## Estrutura dos Metodos
+
+- Metodos devem ser finos: receber request, chamar service, retornar response.
+- Usar Resources para formatar dados antes de retornar.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\AuthorRequest;
 use App\Models\Creators;
+use illuminate\Http\JsonResponse;
 use App\Repositories\Contracts\IAuthorRepository;
 use App\Services\Author\CreateAuthorService;
 use App\Services\Author\DeleteAuthorService;
@@ -17,8 +18,8 @@ class AuthorController extends Controller
         private IAuthorRepository $authorRepository,
         private CreateAuthorService $createaAuthorService,
         private UpdateAuthorService $updateAuthorService,
-        private DeleteAuthorService $deleteAuthorService)
-    {
+        private DeleteAuthorService $deleteAuthorService
+    ) {
     }
 
 
@@ -27,7 +28,7 @@ class AuthorController extends Controller
 
     }
 
-    public function store(AuthorRequest $request)
+    public function store(AuthorRequest $request): JsonResponse
     {
         $author = $this->createaAuthorService->execute($request);
 
@@ -40,7 +41,7 @@ class AuthorController extends Controller
         );
     }
 
-    public function update(AuthorRequest $request, Creators $author)
+    public function update(AuthorRequest $request, Creators $author): JsonResponse
     {
         $author = $this->updateAuthorService->execute($author, $request);
 
@@ -53,7 +54,7 @@ class AuthorController extends Controller
         );
     }
 
-    public function destroy(Creators $author)
+    public function destroy(Creators $author): JsonResponse
     {
         $deleted = $this->deleteAuthorService->execute($author);
 

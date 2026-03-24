@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     public function __construct(
         private CreateUserService $createUserService,
         private UpdateUserService $updateUserService,
@@ -22,6 +23,7 @@ class UserController extends Controller
     ) {
     }
 
+    
 
     public function store(StoreUserRequest $request)
     {
@@ -40,6 +42,7 @@ class UserController extends Controller
             'user' => $updated
         ], 200);
     }
+
 
     public function destroy(User $user, DeleteUserService $deleteUserService)
     {

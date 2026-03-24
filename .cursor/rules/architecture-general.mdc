@@ -1,0 +1,31 @@
+---
+description: Visao geral da arquitetura DDD + Repository Pattern do projeto Laravel
+alwaysApply: true
+---
+
+# Arquitetura DDD + Repository Pattern
+
+Este projeto segue DDD adaptado com Repository Pattern. O fluxo de uma requisicao e:
+
+```
+Request -> Controller -> Service -> Repository -> Banco de Dados
+```
+
+## Estrutura de Pastas
+
+- `app/Http/RequestsValidations/` — Validacao e autorizacao de entrada (FormRequest)
+- `app/Http/Responses/{Domain}/` — Formatacao e padronizacao de saida (JsonResource)
+- `app/Http/Controllers/` — Orquestracao: recebe request, delega ao service, retorna response
+- `app/Services/{Domain}/` — Logica de negocio centralizada (uma classe por acao)
+- `app/Repositories/Contracts/` — Interfaces dos repositorios
+- `app/Repositories/Eloquent/` — Implementacoes concretas dos repositorios
+
+## Regras Gerais
+
+- Cada camada tem responsabilidade unica; nao invadir a responsabilidade de outra camada.
+- Controllers NAO contem logica de negocio; delegam para Services.
+- Services NAO acessam o banco diretamente; delegam para Repositories.
+- Repositories NAO contem logica de negocio; apenas persistem e recuperam dados.
+- Contracts (interfaces) sao registrados no `AppServiceProvider` via `$this->app->bind()`.
+- Dependencias entre camadas sao injetadas via construtor (Dependency Injection).
+- Sempre programar para interfaces (Contracts), nunca para implementacoes concretas.

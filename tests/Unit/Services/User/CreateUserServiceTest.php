@@ -50,7 +50,7 @@ class CreateUserServiceTest extends TestCase
         $this->assertEquals('testnick', $user->nickname);
         $this->assertEquals('testuser', $user->username);
         $this->assertEquals('test@example.com', $user->email);
-        $this->assertTrue(Hash::check('Senha1233412!', $user->password));
+        $this->assertTrue(Hash::check($requestData['password'], $user->password));
     }
 
     public function test_validation_fails_with_invalid_data()
@@ -59,7 +59,7 @@ class CreateUserServiceTest extends TestCase
             'nickname' => '',
             'username' => '',
             'email' => 'invalid-email',
-            'password' => '123',
+            'password' => 'Senha123@_34',
         ];
 
         // Cria o validator usando as regras do StoreUserRequest

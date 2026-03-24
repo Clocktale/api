@@ -1,0 +1,46 @@
+---
+description: Regras da camada Responses (formatacao de saida)
+globs: app/Http/Responses/**/*.php
+alwaysApply: false
+---
+
+# Camada Responses
+
+## Responsavel por
+
+- Transformar e padronizar os dados retornados pela API ao front-end.
+- Estender `Illuminate\Http\Resources\Json\JsonResource`.
+- Definir quais campos do Model sao expostos e como sao formatados.
+
+## NAO responsavel por
+
+- Validacao de dados de entrada (isso e do Request).
+- Logica de negocio (isso e do Service).
+- Acesso a dados ou queries (isso e do Repository).
+- Definir status HTTP (isso e do Controller).
+
+## Nomenclatura e Organizacao
+
+- Nomenclatura: `{Domain}Resource`. Ex: `UserResource`.
+- Diretorio: `app/Http/Responses/{Domain}/`. Ex: `app/Http/Responses/User/UserResource.php`.
+- Namespace: `App\Http\Responses\{Domain}`.
+- Resources utilitarios (ex: paginacao) ficam em subpastas proprias: `app/Http/Responses/Paginator/`.
+
+## Uso
+
+- Controllers DEVEM usar Resources para formatar os dados antes de retornar.
+- Cada Resource define metodos que transformam o Model em array estruturado.
+
+```php
+class UserResource extends JsonResource
+{
+    public function successUser($request): array
+    {
+        return [
+            'id' => $this->id,
+            'nickname' => $this->nickname,
+            // ...
+        ];
+    }
+}
+```
