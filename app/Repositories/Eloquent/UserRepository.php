@@ -16,6 +16,7 @@ class UserRepository implements IUserRepository
      * @return User
      */
 
+
     public function findByEmail(string $email): ?User
     {
         return User::where('email', $email)->first();

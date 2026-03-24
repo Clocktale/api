@@ -21,7 +21,7 @@ class AuthService
         $user = $this->userRepository->findByEmail($data['email']);
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-            throw new AuthenticationException('Credenciais Inválidas');
+            throw new AuthenticationException('Invalid credentials.');
         }
 
         $expiresAt = now()->addDays(15);

@@ -1,0 +1,44 @@
+---
+description: Regras da camada Requests (validacao de entrada)
+globs: app/Http/RequestsValidations/**/*.php
+alwaysApply: false
+---
+
+# Camada Requests (RequestsValidations)
+
+## Responsavel por
+
+- Validar dados recebidos do front-end antes de chegarem ao Controller.
+- Definir regras de autorizacao da requisicao.
+- Padronizar tratamento de falhas de validacao.
+- Estender `Illuminate\Foundation\Http\FormRequest`.
+
+## NAO responsavel por
+
+- Logica de negocio (isso e do Service).
+- Formatacao de resposta (isso e do Response/Resource).
+- Acesso a dados ou queries (isso e do Repository).
+- Instanciar ou manipular Models.
+
+## Nomenclatura
+
+- Padrao: `{Domain}Request` (um por dominio). Ex: `AuthorRequest`.
+- Excecao: quando as validacoes diferem significativamente entre acoes, separar por acao. Ex: `StoreUserRequest`, `UpdateUserRequest`.
+- Namespace: `App\Http\RequestsValidations`.
+
+## Estrutura da Classe
+
+```php
+class AuthorRequest extends FormRequest
+{
+    public function authorize(): bool { /* ... */ }
+    public function rules(): array { /* ... */ }
+    // Opcional: sobrescrever failedValidation() para customizar resposta de erro
+}
+```
+
+## Metodos
+
+- `rules()` — obrigatorio, define as regras de validacao.
+- `authorize()` — opcional, define se o usuario esta autorizado (padrao: `true`).
+- `failedValidation()` — opcional, customiza a resposta quando a validacao falha.

@@ -1,0 +1,51 @@
+---
+description: Regras da camada Services (logica de negocio)
+globs: app/Services/**/*.php
+alwaysApply: false
+---
+
+# Camada Services
+
+## Responsavel por
+
+- Centralizar toda a logica de negocio da aplicacao.
+- Receber dados do Controller (via objeto Request type-hinted).
+- Processar regras de negocio (hashing, transformacoes, validacoes de dominio).
+- Delegar operacoes de persistencia para o Repository (via Contract).
+
+## NAO responsavel por
+
+- Validacao de campos da requisicao (isso e do Request).
+- Formatacao de resposta para o front-end (isso e do Response/Resource).
+- Interacao direta com o banco de dados (isso e do Repository).
+- Retornar HTTP responses ou status codes (isso e do Controller).
+
+## Nomenclatura e Organizacao
+
+- Nomenclatura: `{Action}{Domain}Service`. Ex: `CreateUserService`, `DeleteAuthorService`.
+- Diretorio: `app/Services/{Domain}/`. Ex: `app/Services/User/`, `app/Services/Author/`.
+- Namespace: `App\Services\{Domain}`.
+- Uma classe por acao — cada Service faz apenas uma coisa.
+
+## Metodo Principal
+
+- O metodo publico principal DEVE se chamar `execute()`.
+- Recebe os parametros necessarios (Request, Model, etc.) e retorna o resultado.
+
+```php
+class CreateUserService
+{
+    public function __construct(private IUserRepository $userRepository) {}
+
+    public function execute(StoreUserRequest $request): User
+    {
+        // logica de negocio aqui
+        return $this->userRepository->createUser($user);
+    }
+}
+```
+
+## Injecao de Dependencias
+
+- Repository Contracts sao injetados via construtor usando PHP 8 Constructor Property Promotion.
+- Sempre depender da interface (Contract), nunca da implementacao concreta.

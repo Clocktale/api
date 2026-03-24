@@ -1,0 +1,51 @@
+---
+description: Regras da camada Repository Eloquent (implementacao concreta)
+globs: app/Repositories/Eloquent/**/*.php
+alwaysApply: false
+---
+
+# Camada Repository Eloquent
+
+## Responsavel por
+
+- Implementar concretamente os metodos definidos no Contract (interface).
+- Interagir com o banco de dados via Eloquent ORM.
+- Persistir e recuperar dados (create, read, update, delete).
+
+## NAO responsavel por
+
+- Logica de negocio (isso e do Service).
+- Validacao de dados de entrada (isso e do Request).
+- Formatacao de resposta (isso e do Response/Resource).
+- Manipulacao de dados antes de persistir (hash, transformacoes — isso e do Service).
+
+## Nomenclatura e Organizacao
+
+- Nomenclatura: `{Domain}Repository`. Ex: `UserRepository`, `AuthorRepository`.
+- Deve implementar o Contract correspondente: `implements I{Domain}Repository`.
+- Namespace: `App\Repositories\Eloquent`.
+
+## Estrutura
+
+```php
+class UserRepository implements IUserRepository
+{
+    public function findByEmail(string $email): ?User
+    {
+        return User::where('email', $email)->first();
+    }
+
+    public function createUser(User $user): User
+    {
+        $user->save();
+        return $user;
+    }
+}
+```
+
+## Regras
+
+- Recebe e retorna Models (nao arrays ou DTOs).
+- Metodos devem ter type-hints completos, compatíveis com o Contract.
+- Cada Repository DEVE ser vinculado ao seu Contract no `AppServiceProvider`.
+- Queries e operacoes de banco ficam exclusivamente nesta camada.

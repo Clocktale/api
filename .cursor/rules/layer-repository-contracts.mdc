@@ -1,0 +1,43 @@
+---
+description: Regras da camada Repository Contracts (interfaces)
+globs: app/Repositories/Contracts/**/*.php
+alwaysApply: false
+---
+
+# Camada Repository Contracts
+
+## Responsavel por
+
+- Definir interfaces que abstraem o acesso a dados.
+- Declarar assinaturas de metodos com tipos de parametros e retornos explicitos.
+- Garantir que implementacoes concretas sigam o contrato definido.
+
+## NAO responsavel por
+
+- Implementacao concreta de queries ou persistencia (isso e do Eloquent Repository).
+- Logica de negocio (isso e do Service).
+- Validacao ou formatacao de dados (isso e do Request/Response).
+
+## Nomenclatura
+
+- Nomenclatura: `I{Domain}Repository` (prefixo `I`). Ex: `IUserRepository`, `IAuthorRepository`.
+- Namespace: `App\Repositories\Contracts`.
+
+## Estrutura
+
+```php
+interface IUserRepository
+{
+    public function findByEmail(string $email): ?User;
+    public function createUser(User $user): User;
+    public function updateUser(User $user): User;
+    public function deleteUser(User $user): bool;
+}
+```
+
+## Regras
+
+- Metodos devem ter type-hints completos (parametros e retorno).
+- Usar Models como tipo de parametro e retorno (nao arrays ou DTOs).
+- Cada novo Contract DEVE ser registrado no `AppServiceProvider` via `$this->app->bind()`.
+- Contracts sao usados para injecao de dependencias nos Services e Controllers.
