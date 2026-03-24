@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
                 'nickname' => '012Katsu012',
                 'username' => 'Kayc Paulo',
                 'email' => 'katsu@clocktale.com',
-                'password' => 'Katsu012@_',
+                'password' => 'Silvanot12@e',
                 'role' => $adminRole,
             ],
             [
