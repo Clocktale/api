@@ -10,9 +10,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class AuthorRepository implements IAuthorRepository
 {
-    public function list(string $name, ?int $page = null, int $perPage = 10):LengthAwarePaginator|Collection{
+    // public function list(string $name, ?int $page = null, int $perPage = 10):LengthAwarePaginator|Collection{
         
-    }  
+    // }  
 
     public function createAuthor(Creators $author): Creators
     {

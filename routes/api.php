@@ -15,7 +15,6 @@ Route::prefix('/v1')->group(function () {
 
     Route::get('/authors', [AuthorController::class, 'index']);
 
-
     Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/auth/logout', [AuthController::class, 'logout']);

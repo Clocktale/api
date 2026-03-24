@@ -17,7 +17,7 @@ class AuthController extends Controller
     {
         $data = $this->authService->auth($request->validated());
 
-        return $this->success($data, 'Login realizado com sucesso');
+        return $this->success($data, 'Login successful.');
     }
 
     // public function logout(){

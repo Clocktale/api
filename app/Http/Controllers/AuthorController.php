@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\AuthorRequest;
 use App\Models\Creators;
-use illuminate\Http\JsonResponse;
+use Illuminate\Http\JsonResponse;
 use App\Repositories\Contracts\IAuthorRepository;
 use App\Services\Author\CreateAuthorService;
 use App\Services\Author\DeleteAuthorService;
@@ -32,35 +32,24 @@ class AuthorController extends Controller
     {
         $author = $this->createaAuthorService->execute($request);
 
-        return response()->json(
-            [
-                'message' => 'Author Created Successfully',
-                'author' => $author
-            ],
-            201
-        );
+        return $this->success($author, 'Author created successfully.', 201);
     }
 
     public function update(AuthorRequest $request, Creators $author): JsonResponse
     {
         $author = $this->updateAuthorService->execute($author, $request);
 
-        return response()->json(
-            [
-                'message' => 'Author Updated Successfully',
-                'author' => $author
-            ],
-            200
-        );
+        return $this->success($author, 'Author updated successfully.', 200);
     }
 
     public function destroy(Creators $author): JsonResponse
     {
         $deleted = $this->deleteAuthorService->execute($author);
 
-        if ($deleted)
-            return response()->json(['message' => 'Author deleted Successfully'], 200);
-        else
-            return response()->json(['message' => 'author not found'], 404);
+        if ($deleted) {
+            return $this->success(null, 'Author deleted successfully.', 200);
+        }
+
+        return $this->error('Author not found.', 404);
     }
 }

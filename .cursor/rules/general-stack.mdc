@@ -1,0 +1,41 @@
+---
+description: Stack tecnica fixa do projeto (PHP, Laravel, MySQL, pacotes principais)
+alwaysApply: true
+---
+
+# Stack tecnica
+
+API **backend apenas** (sem front-end de produto neste repositorio). Preferir solucoes alinhadas as versoes abaixo.
+
+## Runtime e framework
+
+- **PHP** `^8.2` (minimo 8.2)
+- **Laravel** `^12.0`
+
+## Banco de dados
+
+- **MySQL** como banco principal (`DB_CONNECTION=mysql`).
+
+## Pacotes de aplicacao (composer `require`)
+
+- **Laravel Sanctum** `^4.0` — autenticacao API (tokens).
+- **spatie/laravel-permission** `^6.24` — roles e permissoes.
+- **darkaonline/l5-swagger** `^9.0` — documentacao OpenAPI/Swagger.
+- **Laravel Tinker** `^2.10.1` — REPL Artisan.
+
+## Ferramentas de desenvolvimento (composer `require-dev`)
+
+- **PHPUnit** `^11.5.3` — testes (`php artisan test`).
+- **Laravel Pint** `^1.13` — formatacao de codigo PHP.
+- **Collision** `^8.6`, **Mockery** `^1.6`, **FakerPHP Faker** `^1.23` — suporte a testes e dados ficticios.
+- **Laravel Pail** `^1.2.2` — logs em tempo real no ambiente de desenvolvimento.
+
+## Infra opcional (futuro)
+
+- **Redis** pode ser adotado depois (cache, filas, sessao); hoje e **configuravel** via `.env`, nao e requisito da stack atual para implementar features.
+
+## Orientacao para o assistente
+
+- Ao sugerir codigo ou dependencias, manter compatibilidade com **PHP 8.2+** e **Laravel 12**.
+- Nao assumir front-end (Vite, Blade como SPA, etc.) como parte do escopo padrao deste projeto.
+- Migracoes, queries e convenções de persistencia devem considerar **MySQL**.
