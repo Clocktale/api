@@ -3,34 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\AuthorRequest;
+use App\Http\RequestsValidations\ListAuthorsRequest;
 use App\Models\Creators;
-use Illuminate\Http\JsonResponse;
-use App\Repositories\Contracts\IAuthorRepository;
 use App\Services\Author\CreateAuthorService;
 use App\Services\Author\DeleteAuthorService;
+use App\Services\Author\ListAuthorService;
 use App\Services\Author\UpdateAuthorService;
-
+use Illuminate\Http\JsonResponse;
 
 class AuthorController extends Controller
 {
-
     public function __construct(
-        private IAuthorRepository $authorRepository,
-        private CreateAuthorService $createaAuthorService,
+        private CreateAuthorService $createAuthorService,
         private UpdateAuthorService $updateAuthorService,
+        private ListAuthorService $listAuthorService,
         private DeleteAuthorService $deleteAuthorService
-    ) {
-    }
+    ) {}
 
-
-    public function index()
+    public function index(ListAuthorsRequest $request): JsonResponse
     {
+        $authors = $this->listAuthorService->execute($request);
 
+        if($authors->isEmpty()){
+            return $this->error('No authors found.', 404);
+        }
+
+        return $this->success($authors, 'Authors listed successfully.', 200);
     }
 
     public function store(AuthorRequest $request): JsonResponse
     {
-        $author = $this->createaAuthorService->execute($request);
+        $author = $this->createAuthorService->execute($request);
 
         return $this->success($author, 'Author created successfully.', 201);
     }

@@ -4,26 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\StoreUserRequest;
 use App\Http\RequestsValidations\UpdateUserRequest;
-use App\Services\User\CreateUserService;
-use App\Services\User\UpdateUserService;
-use App\Services\User\DeleteUserService;
-use App\Repositories\Contracts\IUserRepository;
-use Illuminate\Http\Request;
-
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Repositories\Contracts\IUserRepository;
+use App\Services\User\CreateUserService;
+use App\Services\User\DeleteUserService;
+use App\Services\User\UpdateUserService;
 
 class UserController extends Controller
 {
-
     public function __construct(
         private CreateUserService $createUserService,
         private UpdateUserService $updateUserService,
         private IUserRepository $userRepository
-    ) {
-    }
-
-    
+    ) {}
 
     public function store(StoreUserRequest $request)
     {
@@ -50,5 +43,4 @@ class UserController extends Controller
 
         return $this->error('User not found.', 404);
     }
-
 }

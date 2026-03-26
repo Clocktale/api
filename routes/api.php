@@ -11,7 +11,7 @@ Route::prefix('/v1')->group(function () {
 
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/users', [UserController::class, 'store']);
-
+    
 
     Route::get('/authors', [AuthorController::class, 'index']);
 
