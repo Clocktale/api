@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Creators;
 use App\Models\Genders;
-use App\Models\Publishers;
+use App\Models\Studio;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsersSeeder::class,
-            PublishersSeeder::class,
+            StudioSeeder::class,
             GendersSeeder::class,
             CreatorsSeeder::class,
             StreamingsSeeder::class,
