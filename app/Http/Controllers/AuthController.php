@@ -20,7 +20,10 @@ class AuthController extends Controller
         return $this->success($data, 'Login successful.');
     }
 
-    // public function logout(){
+    public function logout(Request $request){
+        
+        $this->authService->logout($request);
 
-    // }
+        return $this->success(null, 'Logout successful.', 200);
+    }
 }

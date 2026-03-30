@@ -29,5 +29,5 @@ class LoginRequest extends FormRequest
                 'errors' => $validator->errors()
             ], 422)
         );
-    }
+    }    
 }
