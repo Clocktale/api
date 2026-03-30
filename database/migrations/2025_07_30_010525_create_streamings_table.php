@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('streamings', function (Blueprint $table) {
             $table->id();
-            $table->string("streaming_name");
-            $table->string("logo_image_url");
+            $table->string('name')->unique();
+            $table->string('url')->unique();
+            $table->string('logo_url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

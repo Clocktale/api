@@ -4,58 +4,69 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Studio;
-
 
 class StudioSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table("studios")->insert([
-        
-        // Nomes das produtoras de anime, os estúdios
-            ['name' => 'Kadokawa'],
-            ['name' => 'Toei Animation'],
-            ['name' => 'Kyoto Animation'],
-            ['name' => 'Madhouse'],
-            ['name' => 'Bones'],
-            ['name' => 'Sunrise'],
-            ['name' => 'MAPPA'],
-            ['name' => 'Wit Studio'],
-            ['name' => 'Ufotable'],
-            ['name' => 'A-1 Pictures'],
-            ['name' => 'CloverWorks'],
-            ['name' => 'Production I.G'],
-            ['name' => 'Studio Pierrot'],
-            ['name' => 'J.C.Staff'],
-            ['name' => 'Studio Trigger'],
-            ['name' => 'Shaft'],
-            ['name' => 'P.A. Works'],
-            ['name' => 'White Fox'],
-            ['name' => 'Doga Kobo'],
-            ['name' => 'Silver Link'],
-            ['name' => 'Studio Ghibli'],
-            ['name' => 'Studio Deen'],
-            ['name' => 'TMS Entertainment'],
-            ['name' => 'Liden Films'],
-            ['name' => 'Passione'],
-            ['name' => 'Kinema Citrus'],
-            ['name' => 'Science SARU'],
-            ['name' => '8bit'],
-            ['name' => 'David Production'],
-            ['name' => 'Lerche'],
-            ['name' => 'Brain\'s Base'],
-            ['name' => 'Feel.'],
-            ['name' => 'Gonzo'],
-            ['name' => 'Satelight'],
-            ['name' => 'Gainax'],
-            ['name' => 'Tatsunoko Production'],
-            ['name' => 'Studio Bind'],
-            ['name' => 'OLM'],
-            ['name' => 'Diomedéa'],
-            ['name' => 'Project No.9'],
-            ['name' => 'GoHands']
-        ]);
+        $now = now();
+
+        $names = [
+            'Kadokawa',
+            'Toei Animation',
+            'Kyoto Animation',
+            'Madhouse',
+            'Bones',
+            'Sunrise',
+            'MAPPA',
+            'Wit Studio',
+            'Ufotable',
+            'A-1 Pictures',
+            'CloverWorks',
+            'Production I.G',
+            'Studio Pierrot',
+            'J.C.Staff',
+            'Studio Trigger',
+            'Shaft',
+            'P.A. Works',
+            'White Fox',
+            'Doga Kobo',
+            'Silver Link',
+            'Studio Ghibli',
+            'Studio Deen',
+            'TMS Entertainment',
+            'Liden Films',
+            'Passione',
+            'Kinema Citrus',
+            'Science SARU',
+            '8bit',
+            'David Production',
+            'Lerche',
+            'Brain\'s Base',
+            'Feel.',
+            'Gonzo',
+            'Satelight',
+            'Gainax',
+            'Tatsunoko Production',
+            'Studio Bind',
+            'OLM',
+            'Diomedéa',
+            'Project No.9',
+            'GoHands',
+        ];
+
+        // Garante nomes únicos na lista e ignora linhas já existentes (índice unique em name).
+        $names = array_values(array_unique($names));
+
+        $rows = array_map(
+            fn (string $name) => [
+                'name' => $name,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            $names
+        );
+
+        DB::table('studios')->insertOrIgnore($rows);
     }
 }

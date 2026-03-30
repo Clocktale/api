@@ -8,9 +8,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 abstract class Controller extends BaseController
 {
-
     use AuthorizesRequests;
-    
+
     protected function success(
         mixed $data = null,
         string $message = '',

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text("description");
             $table->date("release_date");
             $table->integer("content_lenght");
-            $table->foreignId("publisher_id")->constrained('publishers')->onDelete('cascade');
+            $table->foreignId("studio_id")->constrained('studios')->onDelete('cascade');
             $table->enum("type", ['manga','light Novel','others']);
             $table->string("background_url");
             $table->string("cover_image_url");

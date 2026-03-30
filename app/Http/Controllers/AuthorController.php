@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\AuthorRequest;
-use App\Http\RequestsValidations\ListAuthorsRequest;
+use App\Http\RequestsValidations\ListingPaginateRequest;
 use App\Models\Creators;
 use App\Services\Author\CreateAuthorService;
 use App\Services\Author\DeleteAuthorService;
@@ -20,11 +20,11 @@ class AuthorController extends Controller
         private DeleteAuthorService $deleteAuthorService
     ) {}
 
-    public function index(ListAuthorsRequest $request): JsonResponse
+    public function index(ListingPaginateRequest $request): JsonResponse
     {
         $authors = $this->listAuthorService->execute($request);
 
-        if($authors->isEmpty()){
+        if ($authors->isEmpty()) {
             return $this->error('No authors found.', 404);
         }
 

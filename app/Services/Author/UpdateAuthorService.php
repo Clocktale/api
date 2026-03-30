@@ -15,8 +15,7 @@ class UpdateAuthorService
 
     public function execute(Creators $author, AuthorRequest $request): Creators
     {
-        $data = $request->validated();
-        $author->fill($data);
+        $author->fill($request->validated());
 
         return $this->authorRepository->updateAuthor($author);
     }
