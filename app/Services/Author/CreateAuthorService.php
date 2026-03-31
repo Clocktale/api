@@ -3,7 +3,7 @@
 namespace App\Services\Author;
 
 use App\Http\RequestsValidations\AuthorRequest;
-use App\Models\Creators;
+use App\Models\Author;
 use App\Repositories\Contracts\IAuthorRepository;
 
 
@@ -15,10 +15,10 @@ class CreateAuthorService
     {
 
     }
-    public function execute(AuthorRequest $request): Creators
+    public function execute(AuthorRequest $request): Author
     {
         $author = $request->validated();
-        $data = new Creators($author);
+        $data = new Author($author);
 
         return $this->authorRepository->createAuthor($data);
     }

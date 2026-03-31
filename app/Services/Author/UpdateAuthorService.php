@@ -4,7 +4,7 @@ namespace App\Services\Author;
 
 use App\Http\RequestsValidations\AuthorRequest;
 use App\Repositories\Contracts\IAuthorRepository;
-use App\Models\Creators;
+use App\Models\Author;
 
 class UpdateAuthorService
 {
@@ -13,10 +13,9 @@ class UpdateAuthorService
     {
     }
 
-    public function execute(Creators $author, AuthorRequest $request): Creators
+    public function execute(Author $author, AuthorRequest $request): Author
     {
-        $data = $request->validated();
-        $author->fill($data);
+        $author->fill($request->validated());
 
         return $this->authorRepository->updateAuthor($author);
     }

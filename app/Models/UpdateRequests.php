@@ -11,6 +11,6 @@ class UpdateRequests extends Model
     }
 
     public function content(){
-        return $this->belongsTo(Contents::class);
+        return $this->belongsTo(Anime::class);
     }
 }

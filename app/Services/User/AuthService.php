@@ -6,6 +6,10 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use App\Repositories\Contracts\IUserRepository;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
+
 
 
 
@@ -33,5 +37,10 @@ class AuthService
             'token' => $token->plainTextToken,
             'expire_at' => $expiresAt
         ];
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
     }
 }

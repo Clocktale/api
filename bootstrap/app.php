@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\EnsureUserIsAdmin;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,11 +13,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Laravel 12 define por defeito redirectGuestsTo(route('login')); esta API usa token (POST /api/v1/auth/login).
+        $middleware->redirectGuestsTo('/');
+
         // Regista o 'admin' para o middleware de verificação
         $middleware->alias([
             'admin' => EnsureUserIsAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Sem isto, o Postman (sem Accept: application/json) recebe redirect HTML para / em 401.
+        $exceptions->shouldRenderJsonWhen(function ($request, Throwable $e): bool {
+            return $request->is('api/*') || $request->expectsJson();
+        });
     })->create();

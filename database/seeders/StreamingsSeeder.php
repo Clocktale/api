@@ -14,17 +14,17 @@ class StreamingsSeeder extends Seeder
     public function run(): void
     {
         DB::table('streamings')->insert([
-            ['streaming_name' => 'Netflix', 'logo_image_url' => 'streamings/netflix_logo.png'],
-            ['streaming_name' => 'Amazon Prime Video', 'logo_image_url' => 'streamings/amazon_prime_logo.png'],
-            ['streaming_name' => 'Hulu', 'logo_image_url' => 'streamings/hulu_logo.png'],
-            ['streaming_name' => 'Disney+', 'logo_image_url' => 'streamings/disney_plus_logo.png'],
-            ['streaming_name' => 'HBO Max', 'logo_image_url' => 'streamings/hbo_max_logo.png'],
-            ['streaming_name' => 'Apple TV+', 'logo_image_url' => 'streamings/apple_tv_plus_logo.png'],
-            ['streaming_name' => 'Crunchyroll', 'logo_image_url' => 'streamings/crunchyroll_logo.png'],
-            ['streaming_name' => 'Funimation', 'logo_image_url' => 'streamings/funimation_logo.png'],
-            ['streaming_name' => 'Paramount+', 'logo_image_url' => 'streamings/paramount_plus_logo.png'],
-            ['streaming_name' => 'Peacock', 'logo_image_url' => 'streamings/peacock_logo.png'],
-            ['streaming_name' => 'Discovery+', 'logo_image_url' => 'streamings/discovery_plus_logo.png'],
+            ['name' => 'Netflix', 'url' => 'https://www.netflix.com/', 'logo_url' => 'streamings/netflix_logo.png'],
+            ['name' => 'Amazon Prime Video', 'url' => 'https://www.amazon.com/prime-video', 'logo_url' => 'streamings/amazon_prime_logo.png'],
+            ['name' => 'Hulu', 'url' => 'https://www.hulu.com/', 'logo_url' => 'streamings/hulu_logo.png'],
+            ['name' => 'Disney+', 'url' => 'https://www.disneyplus.com/', 'logo_url' => 'streamings/disney_plus_logo.png'],
+            ['name' => 'HBO Max', 'url' => 'https://www.hbomax.com/', 'logo_url' => 'streamings/hbo_max_logo.png'],
+            ['name' => 'Apple TV+', 'url' => 'https://www.apple.com/apple-tv-plus/', 'logo_url' => 'streamings/apple_tv_plus_logo.png'],
+            ['name' => 'Crunchyroll', 'url' => 'https://www.crunchyroll.com/', 'logo_url' => 'streamings/crunchyroll_logo.png'],
+            ['name' => 'Funimation', 'url' => 'https://www.funimation.com/', 'logo_url' => 'streamings/funimation_logo.png'],
+            ['name' => 'Paramount+', 'url' => 'https://www.paramountplus.com/', 'logo_url' => 'streamings/paramount_plus_logo.png'],
+            ['name' => 'Peacock', 'url' => 'https://www.peacocktv.com/', 'logo_url' => 'streamings/peacock_logo.png'],
+            ['name' => 'Discovery+', 'url' => 'https://www.discoveryplus.com/', 'logo_url' => 'streamings/discovery_plus_logo.png'],
         ]);
     }
 }

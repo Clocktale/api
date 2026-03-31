@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Creators;
+use App\Models\Author;
 use App\Models\Genders;
 use App\Models\Studio;
 use App\Models\User;
@@ -16,24 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // Uncomment the following lines to seed specific models
-        // $this->call([
-        //     UsersSeeder::class,
-        //     ContentsSeeder::class,
-        //     StreamingsSeeder::class,
-        //     ContentStarRatingsSeeder::class,
-        //     UpdateRequestsSeeder::class,
-        //     IncludeRequestsSeeder::class,
-        // ]);
-
         $this->call([
             UsersSeeder::class,
             StudioSeeder::class,
             GendersSeeder::class,
-            CreatorsSeeder::class,
+            AuthorsSeeder::class,
             StreamingsSeeder::class,
+            StudioSeeder::class,
             ContentsSeeder::class,
             RoleSeeder::class
         ]);

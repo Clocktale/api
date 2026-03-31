@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('animes', function (Blueprint $table) {
             $table->id();
             $table->string("title");
             $table->text("description");
             $table->date("release_date");
             $table->integer("content_lenght");
-            $table->foreignId("publisher_id")->constrained('publishers')->onDelete('cascade');
+            $table->foreignId("studio_id")->constrained('studios')->onDelete('cascade');
             $table->enum("type", ['manga','light Novel','others']);
             $table->string("background_url");
             $table->string("cover_image_url");
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('animes');
     }
 };

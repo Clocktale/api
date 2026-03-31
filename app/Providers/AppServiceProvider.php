@@ -8,6 +8,8 @@ use App\Repositories\Contracts\IAuthorRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\StudioRepository;
 use App\Repositories\Eloquent\AuthorRepository;
+use App\Repositories\Eloquent\StreamingRepository;
+use App\Repositories\Contracts\IStreamingRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IStudioRepository::class, StudioRepository::class);
         $this->app->bind(IAuthorRepository::class, AuthorRepository::class);
+        $this->app->bind(IStreamingRepository::class, StreamingRepository::class);
     }
 
     /**

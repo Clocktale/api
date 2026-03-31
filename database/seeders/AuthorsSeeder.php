@@ -3,18 +3,18 @@
 namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Creators;
+use App\Models\Author;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CreatorsSeeder extends Seeder
+class AuthorsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('creators')->insert([
+        DB::table('authors')->insert([
 
             // Mangakas (autor + ilustrador)
             ['name' => 'Koyoharu Gotouge'],  // Demon Slayer  
