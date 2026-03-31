@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Creators;
+use App\Models\Author;
 use App\Models\Genders;
 use App\Models\Studio;
 use App\Models\User;
@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             StudioSeeder::class,
             GendersSeeder::class,
-            CreatorsSeeder::class,
+            AuthorsSeeder::class,
             StreamingsSeeder::class,
             StudioSeeder::class,
             ContentsSeeder::class,

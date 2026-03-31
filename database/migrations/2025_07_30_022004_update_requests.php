@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId("content_id")->constrained("contents")->onDelete("cascade");
+            $table->foreignId("anime_id")->constrained("animes")->onDelete("cascade");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
         });
     }

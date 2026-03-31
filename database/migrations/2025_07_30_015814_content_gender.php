@@ -14,10 +14,10 @@ return new class extends Migration
         //
         Schema::create('content_gender', function(Blueprint $table){
             
-            $table->foreignId("content_id")->constrained("contents")->onDelete("cascade");
+            $table->foreignId("anime_id")->constrained("animes")->onDelete("cascade");
             $table->foreignId("gender_id")->constrained("genders")->onDelete("cascade");
             
-            $table->primary(['content_id', 'gender_id']);
+            $table->primary(['anime_id', 'gender_id']);
         });
     }
 

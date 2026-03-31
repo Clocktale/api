@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create("content_streaming", function (Blueprint $table) {
 
-            $table->foreignId("content_id")->constrained("contents")->onDelete("cascade");
+            $table->foreignId("anime_id")->constrained("animes")->onDelete("cascade");
             $table->foreignId("streaming_id")->constrained("streamings")->onDelete("cascade");
 
-            $table->primary(['content_id','streaming_id']);
+            $table->primary(['anime_id','streaming_id']);
         });
     }
 

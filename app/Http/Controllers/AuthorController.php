@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\RequestsValidations\AuthorRequest;
 use App\Http\RequestsValidations\ListingPaginateRequest;
-use App\Models\Creators;
+use App\Models\Author;
 use App\Services\Author\CreateAuthorService;
 use App\Services\Author\DeleteAuthorService;
 use App\Services\Author\ListAuthorService;
@@ -38,14 +38,14 @@ class AuthorController extends Controller
         return $this->success($author, 'Author created successfully.', 201);
     }
 
-    public function update(AuthorRequest $request, Creators $author): JsonResponse
+    public function update(AuthorRequest $request, Author $author): JsonResponse
     {
         $author = $this->updateAuthorService->execute($author, $request);
 
         return $this->success($author, 'Author updated successfully.', 200);
     }
 
-    public function destroy(Creators $author): JsonResponse
+    public function destroy(Author $author): JsonResponse
     {
         $deleted = $this->deleteAuthorService->execute($author);
 

@@ -11,6 +11,6 @@ class Streamings extends Model
     protected $fillable = ['name', 'url', 'logo_url'];
 
     public function contents(){
-        return $this->belongsToMany(Contents::class, 'contents_streamings', 'streaming_id','content_id' );
+        return $this->belongsToMany(Anime::class, 'contents_streamings', 'streaming_id','anime_id' );
     }
 }

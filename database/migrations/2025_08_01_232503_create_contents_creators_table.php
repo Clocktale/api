@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('content_creators', function (Blueprint $table) {
             
-            $table->foreignId('creator_id')->constrained('creators')->onDelete('cascade');
+            $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
             $table->enum('role', ['author', 'illustrator', 'mangaka'])->default('author');
-            $table->foreignId('content_id')->constrained('contents')->onDelete('cascade');
+            $table->foreignId('anime_id')->constrained('animes')->onDelete('cascade');
 
-            $table->primary(['creator_id', 'content_id']);
+            $table->primary(['author_id', 'anime_id']);
         });
     }
 

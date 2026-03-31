@@ -2,7 +2,7 @@
 
 namespace App\Services\Author;
 
-use App\Models\Creators;
+use App\Models\Author;
 use App\Repositories\Contracts\IAuthorRepository;
 
 class DeleteAuthorService
@@ -11,7 +11,7 @@ class DeleteAuthorService
     {
     }
 
-    public function execute(Creators $author): bool
+    public function execute(Author $author): bool
     {
         return $this->authorRepository->deleteAuthor($author);
     }

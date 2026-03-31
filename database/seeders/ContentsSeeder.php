@@ -16,7 +16,7 @@ class ContentsSeeder extends Seeder
     public function run(): void
     {
         //mangas
-        DB::table('contents')->insert([
+        DB::table('animes')->insert([
             //mangas
             ['title' => 'Attack on Titan', 'description' => 'Uma história da luta da humanidade contra criaturas humanoides gigantes.', 'studio_id' => 3, 'type' => 'manga', 'release_date' => '2009-09-09', 'cover_image_url' => 'mangas/attack_on_titan.jpg', 'background_url' => 'mangas/attack_on_titan_bg.jpg', 'status' => 'completed', 'story_lenght' => 'long', 'content_lenght' => 139],
             

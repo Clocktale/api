@@ -15,6 +15,6 @@ class Studio extends Model
 
     public function contents(): HasMany
     {
-        return $this->hasMany(Contents::class);
+        return $this->hasMany(Anime::class);
     }
 }
