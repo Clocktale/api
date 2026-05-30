@@ -60,6 +60,20 @@ return [
             'report' => false,
         ],
 
+        /*
+        | Azure Blob Storage — container = "images", blobs em streamings/...
+        | Crie o container no portal Azure (Storage account → Containers).
+        */
+        'azure' => [
+            'driver' => 'azure',
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+            'container' => env('AZURE_STORAGE_CONTAINER', 'images'),
+            /* true se o container tiver acesso público de leitura (URLs diretas em publicUrl). */
+            'public' => env('AZURE_STORAGE_PUBLIC', false),
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

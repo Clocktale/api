@@ -3,7 +3,6 @@
 namespace App\Http\Responses\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Arr;
 
 class UserResource extends JsonResource
 {
@@ -20,7 +19,8 @@ class UserResource extends JsonResource
             'nickname' => $this->nickname,
             'name' => $this->name,
             'email' => $this->email,
-            'profile_picture' => $this->profile_picture ? url('storage/' . $this->profile_picture) : null,
+            'role' => $this->hasRole('admin') ? 'admin' : 'user',
+            'profile_picture' => $this->profile_picture ? url('storage/'.$this->profile_picture) : null,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

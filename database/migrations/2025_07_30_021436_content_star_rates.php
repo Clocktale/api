@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("content_star_rates", function(Blueprint $table){
-            
-            $table->double("quantity");
+        Schema::create('anime_star_rates', function (Blueprint $table) {
 
-            $table->foreignId("anime_id")->constrained("animes")->onDelete("cascade");
-            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
+            $table->double('quantity');
+
+            $table->foreignId('anime_id')->constrained('animes')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 
             $table->primary(['anime_id', 'user_id']);
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("content_star_rates");
+        Schema::dropIfExists('anime_star_rates');
     }
 };

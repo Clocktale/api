@@ -13,19 +13,17 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->date("release_date");
-            $table->integer("content_lenght");
-            $table->foreignId("studio_id")->constrained('studios')->onDelete('cascade');
-            $table->enum("type", ['manga','light Novel','others']);
-            $table->string("background_url");
-            $table->string("cover_image_url");
-            $table->enum("status", ['ongoing', 'completed', 'hiatus']);
-            $table->enum("story_lenght", ['short','medium', 'long', 'verylong']);
-            $table->double("stars_rate")->default(0);
-            $table->timestamp("update_at")->nullable();
-
+            $table->string('title')->unique();
+            $table->string('original_title')->nullable();
+            $table->text('description');
+            $table->date('release_date');
+            $table->integer('content_lenght');
+            $table->foreignId('studio_id')->constrained('studios')->onDelete('cascade');
+            $table->string('cover_image_url');
+            $table->enum('status', ['ongoing', 'completed', 'hiatus']);
+            $table->enum('story_lenght', ['short', 'medium', 'long', 'verylong']);
+            $table->double('stars_rate')->default(0);
+            $table->timestamp('update_at')->nullable();
 
             $table->timestamps();
         });

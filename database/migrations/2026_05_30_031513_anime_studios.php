@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('anime_streaming', function (Blueprint $table) {
-
+        //
+        Schema::create('anime_studios', function (Blueprint $table) {
+            
             $table->foreignId('anime_id')->constrained('animes')->onDelete('cascade');
-            $table->foreignId('streaming_id')->constrained('streamings')->onDelete('cascade');
+            $table->foreignId('studio_id')->constrained('studios')->onDelete('cascade');
 
-            $table->primary(['anime_id', 'streaming_id']);
+            $table->primary(['anime_id', 'studio_id']);
         });
     }
 
@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('anime_streaming');
+        //
+        Schema::dropIfExists('anime_studios');
     }
 };

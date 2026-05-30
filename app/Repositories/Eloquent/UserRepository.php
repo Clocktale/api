@@ -2,34 +2,27 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Http\RequestsValidations\StoreUserRequest;
-use App\Repositories\Contracts\IUserRepository;
 use App\Models\User;
-
+use App\Repositories\Contracts\IUserRepository;
 
 class UserRepository implements IUserRepository
 {
-    /**
-     * Handle the creation of a new user.
-     *
-     * @param StoreUserRequest $request
-     * @return User
-     */
-
-
     public function findByEmail(string $email): ?User
     {
-        return User::where('email', $email)->first();
+        return User::query()->with('roles')->where('email', $email)->first();
     }
 
     public function createUser(User $user): User
     {
         $user->save();
+
         return $user;
     }
+
     public function updateUser(User $user): User
     {
         $user->save();
+
         return $user;
     }
 
@@ -38,4 +31,3 @@ class UserRepository implements IUserRepository
         return $user->delete();
     }
 }
-

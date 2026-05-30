@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('profile_picture')->default('profile_picture/default.jpeg');
             $table->string('nickname');
             $table->string('username')->unique();
             $table->string('email')->unique();
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("users");
+        Schema::dropIfExists('users');
     }
 };

@@ -2,9 +2,10 @@
 
 namespace App\Http\RequestsValidations;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\User;
+
 class UpdateUserRequest extends FormRequest
 {
     /**
@@ -20,21 +21,21 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "nickname" => "sometimes|required|string|max:255",
-            "email" => [
-                "sometimes",
-                "required",
-                "email",
+            'nickname' => 'sometimes|required|string|max:255',
+            'email' => [
+                'sometimes',
+                'required',
+                'email',
                 Rule::unique('users', 'email')->ignore($this->user->id),
             ],
-            "password" => [
-                "sometimes",
-                "required",
-                "string",
-                "min:12",             // mínimo de 12 caracteres
-                "regex:/[A-Z]/",      // pelo menos uma letra maiúscula
-                "regex:/[a-z]/",      // pelo menos uma letra minúscula
-                "regex:/[@$!%*?&]/"   // pelo menos um caractere especial
+            'password' => [
+                'sometimes',
+                'required',
+                'string',
+                'min:8',             // mínimo de 12 caracteres
+                'regex:/[A-Z]/',      // pelo menos uma letra maiúscula
+                'regex:/[a-z]/',      // pelo menos uma letra minúscula
+                'regex:/[@$!%*?&]/',   // pelo menos um caractere especial
             ],
         ];
     }
