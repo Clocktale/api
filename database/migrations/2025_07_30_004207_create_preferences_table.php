@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('preferences', function (Blueprint $table) {
 
-            $table->foreignId("user_id")->constrained('users');
-            $table->enum("content_type", ['Manga','Light Novel','Others']);
-            $table->enum("story_lenght", ['short','medium','long', 'verylong']);
+            $table->foreignId('user_id')->constrained('users');
+            $table->enum('story_lenght', ['short', 'medium', 'long', 'verylong']);
             $table->timestamps();
         });
     }

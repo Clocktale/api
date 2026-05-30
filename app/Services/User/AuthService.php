@@ -2,29 +2,20 @@
 
 namespace App\Services\User;
 
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\HasApiTokens;
 use App\Repositories\Contracts\IUserRepository;
-use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\PersonalAccessToken;
-
-
-
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
-
-    public function __construct(private IUserRepository $userRepository)
-    {
-    }
+    public function __construct(private IUserRepository $userRepository) {}
 
     public function auth(array $data)
     {
         $user = $this->userRepository->findByEmail($data['email']);
 
-        if (!$user || !Hash::check($data['password'], $user->password)) {
+        if (! $user || ! Hash::check($data['password'], $user->password)) {
             throw new AuthenticationException('Invalid credentials.');
         }
 
@@ -32,10 +23,13 @@ class AuthService
 
         $token = $user->createToken('token', ['*'], $expiresAt);
 
+        $user->makeHidden(['roles']);
+
         return [
             'user' => $user,
+            'role' => $user->hasRole('admin') ? 'admin' : 'user',
             'token' => $token->plainTextToken,
-            'expire_at' => $expiresAt
+            'expire_at' => $expiresAt,
         ];
     }
 

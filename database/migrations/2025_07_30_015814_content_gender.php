@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('content_gender', function(Blueprint $table){
-            
-            $table->foreignId("anime_id")->constrained("animes")->onDelete("cascade");
-            $table->foreignId("gender_id")->constrained("genders")->onDelete("cascade");
-            
+        Schema::create('anime_gender', function (Blueprint $table) {
+
+            $table->foreignId('anime_id')->constrained('animes')->onDelete('cascade');
+            $table->foreignId('gender_id')->constrained('genders')->onDelete('cascade');
+
             $table->primary(['anime_id', 'gender_id']);
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("content_gender");
+        Schema::dropIfExists('anime_gender');
     }
 };

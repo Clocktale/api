@@ -7,15 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class ContentsCreator extends Model
 {
     //
-    protected $table = 'contents_creators';
-    protected $primaryKey = 'id';
-    public $timestamps = false;
-    protected $fillable = ['content_id', 'creators_id'];
-    protected $casts = [
-        'content_id' => 'integer',
-        'creators_id' => 'integer',
-    ];
+    protected $table = 'anime_author';
 
+    protected $primaryKey = 'id';
+
+    public $timestamps = false;
+
+    protected $fillable = ['anime_id', 'author_id'];
+
+    protected $casts = [
+        'anime_id' => 'integer',
+        'author_id' => 'integer',
+    ];
 
     public function contents()
     {

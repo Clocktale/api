@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class UsersSeeder extends Seeder
@@ -13,11 +13,10 @@ class UsersSeeder extends Seeder
     {
         // Criar roles se não existirem
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $userRole  = Role::firstOrCreate(['name' => 'user']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
 
         $users = [
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => '012Katsu012',
                 'username' => 'Kayc Paulo',
                 'email' => 'katsu@clocktale.com',
@@ -25,7 +24,6 @@ class UsersSeeder extends Seeder
                 'role' => $adminRole,
             ],
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => 'Admin_Account',
                 'username' => 'Admin Example',
                 'email' => 'admin@clocktale.com',
@@ -33,7 +31,6 @@ class UsersSeeder extends Seeder
                 'role' => $adminRole,
             ],
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => 'Cupcake',
                 'username' => 'Amanda Smith',
                 'email' => 'smith.amands@clocktale.com',
@@ -41,7 +38,6 @@ class UsersSeeder extends Seeder
                 'role' => $userRole,
             ],
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => 'Johnny_doe',
                 'username' => 'John Doe',
                 'email' => 'johnny.doe@clocktale.com',
@@ -49,7 +45,6 @@ class UsersSeeder extends Seeder
                 'role' => $userRole,
             ],
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => 'Jane_Doe',
                 'username' => 'Jane Doe',
                 'email' => 'jane.doe@clocktale.com',
@@ -57,7 +52,6 @@ class UsersSeeder extends Seeder
                 'role' => $userRole,
             ],
             [
-                'profile_picture' => 'profile_picture/default_icon.png',
                 'nickname' => 'Mizuki',
                 'username' => 'Maria',
                 'email' => 'mizuki@clocktale.com',
@@ -71,7 +65,6 @@ class UsersSeeder extends Seeder
             $user = User::firstOrCreate(
                 ['email' => $data['email']],
                 [
-                    'profile_picture' => $data['profile_picture'],
                     'nickname' => $data['nickname'],
                     'username' => $data['username'],
                     'password' => Hash::make($data['password']),

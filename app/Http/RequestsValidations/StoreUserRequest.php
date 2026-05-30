@@ -25,10 +25,10 @@ class StoreUserRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
-                'min:12',             // mínimo de 12 caracteres
+                'min:8',             // mínimo de 8 caracteres
                 'regex:/[A-Z]/',      // pelo menos uma letra maiúscula
                 'regex:/[a-z]/',      // pelo menos uma letra minúscula
-                'regex:/[@$!%*?&]/'   // pelo menos um caractere especial
+                'regex:/[@$!%*?&]/',   // pelo menos um caractere especial
             ],
             'role' => 'in:user,admin',
         ];

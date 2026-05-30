@@ -13,8 +13,14 @@ class Studio extends Model
     protected $fillable = ['name'];
 
 
-    public function contents(): HasMany
+    public function animes()
     {
-        return $this->hasMany(Anime::class);
+        return $this->belongsToMany(Anime::class, 'anime_studios', 'studio_id', 'anime_id');
     }
+
+    public function animePublisher()
+    {
+        return $this->hasMany(Anime::class, 'studio_id', 'id');
+    }
+
 }

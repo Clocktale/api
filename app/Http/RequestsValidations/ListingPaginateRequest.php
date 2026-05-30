@@ -49,7 +49,7 @@ class ListingPaginateRequest extends FormRequest
      *
      * @return array{name: ?string, page: ?int, perPage: int}
      */
-    
+
     public function listingPaginationParams(): array
     {
         $validated = $this->validated();

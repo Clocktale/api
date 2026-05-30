@@ -12,9 +12,20 @@ class CreateStreamingService
 
     public function execute(StreamingRequest $request): Streamings
     {
-        $streaming = $request->validated();
-        $data = new Streamings($streaming);
+        $data = $request->validated();
 
-        return $this->streamingRepository->createStreaming($data);
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+
+            $path = 'streamings/'.$fileName;
+
+            $file->storeAs('streamings', $fileName, 'azure');
+            $data['logo_url'] = $path;
+        }
+
+        $streaming = new Streamings($data);
+
+        return $this->streamingRepository->createStreaming($streaming);
     }
 }

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('content_creators', function (Blueprint $table) {
-            
+        Schema::create('anime_author', function (Blueprint $table) {
+
             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
-            $table->enum('role', ['author', 'illustrator', 'mangaka'])->default('author');
             $table->foreignId('anime_id')->constrained('animes')->onDelete('cascade');
 
             $table->primary(['author_id', 'anime_id']);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('creator_contents');
+        Schema::dropIfExists('anime_author');
     }
 };
