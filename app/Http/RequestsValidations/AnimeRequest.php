@@ -18,6 +18,8 @@ class AnimeRequest extends FormRequest
             'studio_id' => 'required|integer|exists:studios,id',
             'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'cover_image_url' => 'sometimes|nullable|string|max:255',
+            'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'banner_image_url' => 'sometimes|nullable|string|max:255',
             'status' => 'required|string|max:255',
             'story_lenght' => 'required|string|max:255',
         ];

@@ -24,9 +24,6 @@ class AuthorController extends Controller
     {
         $authors = $this->listAuthorService->execute($request);
 
-        if ($authors->isEmpty()) {
-            return $this->error('No authors found.', 404);
-        }
 
         return $this->success($authors, 'Authors listed successfully.', 200);
     }

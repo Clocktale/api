@@ -25,10 +25,6 @@ class StreamingController extends Controller
     {
         $streaming = $this->listeningStreamingService->execute($request);
 
-        if ($streaming->isEmpty()) {
-            return $this->error("No streamings found.", 404);
-        }
-
         return $this->success($streaming, "Streamings listed successfully.", 200);
     }
 

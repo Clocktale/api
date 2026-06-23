@@ -26,12 +26,20 @@ class CreateAnimeService
 
         if ($request->hasFile('cover_image')) {
             $file = $request->file('cover_image');
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+            $path = 'animes/cover/'.$fileName;
+            $file->storeAs('animes/cover/', $fileName, 'azure');
+            $data['cover_image_url'] = $path;
+        }
+
+        if ($request->hasFile('banner_image')) {
+            $file = $request->file('banner_image');
 
             $fileName = time() . '_' . uniqid('', true) . '.' . $file->getClientOriginalExtension();
-            $path = 'animes/' . $fileName;
+            $path = 'animes/banner/' . $fileName;
 
-            $file->storeAs('animes/', $fileName, 'azure');
-            $data['cover_image_url'] = $path;
+            $file->storeAs('animes/banner/', $fileName, 'azure');
+            $data['banner_image_url'] = $path;
         }
 
         $anime = new Anime($data);

@@ -29,7 +29,7 @@ class StudioController extends Controller
     public function update(Studio $studio, UpdateStudioRequest $request): JsonResponse
     {
         $updatedStudio = $this->updateStudioService->execute($studio, $request);
-        return response()->json($updatedStudio, 200);
+        return response()->json(['message' => 'Studio updated successfully', 'studio' => $updatedStudio], 200);
     }
     public function destroy(Studio $studio)
     {
