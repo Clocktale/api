@@ -6,21 +6,18 @@ use App\Http\RequestsValidations\StoreUserRequest;
 use App\Http\RequestsValidations\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\Contracts\IUserRepository;
-use App\Services\User\CreateUserService;
-use App\Services\User\DeleteUserService;
-use App\Services\User\UpdateUserService;
+use App\Services\User\UserService;
 
 class UserController extends Controller
 {
     public function __construct(
-        private CreateUserService $createUserService,
-        private UpdateUserService $updateUserService,
+        private UserService $userService,
         private IUserRepository $userRepository
     ) {}
 
     public function store(StoreUserRequest $request)
     {
-        $user = $this->createUserService->execute($request);
+        $user = $this->userService->create($request);
 
         return $this->success($user, 'User created successfully.', 201);
     }
@@ -28,14 +25,14 @@ class UserController extends Controller
     public function update(User $user, UpdateUserRequest $request)
     {
         $this->authorize('update', $user);
-        $updated = $this->updateUserService->execute($user, $request);
+        $updated = $this->userService->update($user, $request);
 
         return $this->success($updated, 'User updated successfully.', 200);
     }
 
-    public function destroy(User $user, DeleteUserService $deleteUserService)
+    public function destroy(User $user)
     {
-        $deleted = $deleteUserService->execute($user);
+        $deleted = $this->userService->delete($user);
 
         if ($deleted) {
             return $this->success(null, 'User deleted successfully.', 200);

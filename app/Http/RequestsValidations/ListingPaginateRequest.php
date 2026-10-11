@@ -57,7 +57,7 @@ class ListingPaginateRequest extends FormRequest
         return [
             'name' => $validated['name'] ?? null,
             'page' => isset($validated['page']) ? (int) $validated['page'] : 1,
-            'perPage' => isset($validated['per_page']) ? (int) $validated['per_page'] : 10,
+            'perPage' => isset($validated['perPage']) ? (int) $validated['perPage'] : 10,
         ];
     }
 }

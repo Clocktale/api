@@ -23,7 +23,7 @@ class Anime extends Model
 
     public function streamings()
     {
-        return $this->belongsToMany(Streamings::class, 'anime_streamings', 'anime_id', 'streaming_id');
+        return $this->belongsToMany(Streamings::class, 'anime_streaming', 'anime_id', 'streaming_id');
     }
 
     public function publishers()
@@ -33,7 +33,7 @@ class Anime extends Model
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class, 'anime_authors', 'anime_id', 'author_id');
+        return $this->belongsToMany(Author::class, 'anime_author', 'anime_id', 'author_id');
     }
 
     public function studios()
@@ -43,7 +43,7 @@ class Anime extends Model
 
     public function starRatings()
     {
-        return $this->hasMany(ContentStarRatings::class);
+        return $this->hasMany(ContentStarRatings::class, 'anime_id');
     }
 
     public function creatorContents()
