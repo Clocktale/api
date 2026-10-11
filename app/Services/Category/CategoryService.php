@@ -16,4 +16,16 @@ class CategoryService
 
         return $this->categoryRepository->createCategory($category);
     }
+
+    public function update(Category $category, CategoryRequest $request): Category
+    {
+        $category->update($request->validated());
+
+        return $category;
+    }
+
+    public function delete(Category $category): bool
+    {
+        return $this->categoryRepository->deleteCategory($category);
+    }
 }

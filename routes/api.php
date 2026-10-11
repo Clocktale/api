@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StreamingController;
+use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,9 +39,14 @@ Route::prefix('/v1')->group(function () {
                 Route::put('/streamings/{streaming}', [StreamingController::class, 'update']);
                 Route::delete('/streamings/{streaming}', [StreamingController::class, 'destroy']);
 
+                Route::post('/studios', [StudioController::class, 'store']);
+                Route::put('/studios/{studio}', [StudioController::class, 'update']);
+                Route::delete('/studios/{studio}', [StudioController::class, 'destroy']);
+
                 Route::post('/animes', [AnimeController::class, 'store']);
 
                 Route::post('/categories', [CategoryController::class, 'store']);
+                Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
                 Route::put('/animes/{anime}', [AnimeController::class, 'update']);
                 Route::delete('/animes/{anime}', [AnimeController::class, 'destroy']);
             });

@@ -679,6 +679,39 @@
                 ]
             }
         },
+        "/admin/categories/{category}": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Remove uma categoria de anime",
+                "description": "Exige token e papel admin. Remove uma categoria de anime.",
+                "operationId": "e0a9b47eaa8fe84a8db092daebb70bbd",
+                "responses": {
+                    "200": {
+                        "description": "Categoria removida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado ou sem papel admin"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/streamings": {
             "get": {
                 "tags": [
@@ -926,6 +959,159 @@
                     },
                     "403": {
                         "description": "Sem papel admin"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/admin/studios": {
+            "post": {
+                "tags": [
+                    "Studios"
+                ],
+                "summary": "Cria um estúdio de anime",
+                "description": "Exige token e papel admin. Nome único, até 50 caracteres. Logo é opcional.",
+                "operationId": "df3050db0c6ea51cd86702138dfa0ea1",
+                "responses": {
+                    "201": {
+                        "description": "Estúdio criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Sem papel admin"
+                    },
+                    "422": {
+                        "description": "Validação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/admin/studios/{studio}": {
+            "put": {
+                "tags": [
+                    "Studios"
+                ],
+                "summary": "Atualiza um estúdio de anime",
+                "description": "Exige token e papel admin. Nome único, até 50 caracteres. Logo é opcional.",
+                "operationId": "b51bb994b8e74cbebe9b4da880e52067",
+                "responses": {
+                    "200": {
+                        "description": "Estúdio atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Sem papel admin"
+                    },
+                    "422": {
+                        "description": "Validação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Studios"
+                ],
+                "summary": "Remove um estúdio de anime",
+                "description": "Exige token e papel admin. Remove um estúdio de anime.",
+                "operationId": "05a827a713c3971db992bcc29b861ce8",
+                "responses": {
+                    "200": {
+                        "description": "Estúdio removido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Sem papel admin"
+                    },
+                    "404": {
+                        "description": "Estúdio não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/studios/{studio}": {
+            "get": {
+                "tags": [
+                    "Studios"
+                ],
+                "summary": "Mostra um estúdio de anime",
+                "description": "Mostra um estúdio de anime.",
+                "operationId": "2d4a3338e6cf1af25c074c06e8d45292",
+                "responses": {
+                    "200": {
+                        "description": "Lista de estúdios",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "404": {
+                        "description": "Estúdio não encontrado"
                     }
                 },
                 "security": [
@@ -1211,6 +1397,10 @@
         {
             "name": "Streamings",
             "description": "Streamings"
+        },
+        {
+            "name": "Studios",
+            "description": "Studios"
         },
         {
             "name": "Users",

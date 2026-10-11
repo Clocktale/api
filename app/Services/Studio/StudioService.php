@@ -3,10 +3,11 @@
 namespace App\Services\Studio;
 
 use App\Models\Studio;
-use App\Http\RequestsValidations\StoreStudioRequest;
-use App\Http\RequestsValidations\UpdateStudioRequest;
+use App\Http\RequestsValidations\StudioRequest;
 use App\Repositories\Contracts\IStudioRepository;
 use App\Services\AzureStorageService;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class StudioService
 {
@@ -15,7 +16,7 @@ class StudioService
         $this->azureStorageService = new AzureStorageService();
     }
 
-    public function create(StoreStudioRequest $request)
+    public function create(StudioRequest $request)
     {
         // Pega apenas os dados validados do request
         $studio = $request->validated();
@@ -28,7 +29,12 @@ class StudioService
         return $this->studioRepository->createStudio($data);
     }
 
-    public function update(Studio $studio, UpdateStudioRequest $request): Studio
+    public function list(string $name, int $page, int $perPage): LengthAwarePaginator|Collection
+    {
+        return $this->studioRepository->listStudio($name, $page, $perPage);
+    }
+
+    public function update(Studio $studio, StudioRequest $request): Studio
     {
         // Pega apenas os dados validados ('name')
         $data = $request->validated();

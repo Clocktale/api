@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StreamingsSeeder::class,
             StudioSeeder::class,
             RoleSeeder::class,
+            Categories::class,
         ]);
 
     }

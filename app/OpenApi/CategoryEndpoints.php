@@ -26,6 +26,20 @@ use OpenApi\Attributes as OA;
         new OA\Response(response: 422, description: 'Validação', content: new OA\JsonContent(ref: '#/components/schemas/ValidationError')),
     ]
 )]
+
+#[OA\Delete(
+    path: '/admin/categories/{category}',
+    summary: 'Remove uma categoria de anime',
+    description: 'Exige token e papel admin. Remove uma categoria de anime.',
+    security: [['bearerAuth' => []]],
+    tags: ['Categories'],
+    responses: [
+        new OA\Response(response: 200, description: 'Categoria removida', content: new OA\JsonContent(ref: '#/components/schemas/SuccessResponse')),
+        new OA\Response(response: 401, description: 'Não autenticado ou sem papel admin'),
+        new OA\Response(response: 404, description: 'Categoria não encontrada'),
+    ]
+)]
+
 class CategoryEndpoints
 {
 }

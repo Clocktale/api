@@ -4,7 +4,7 @@ namespace App\Http\RequestsValidations;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudioRequest extends FormRequest
+class StudioRequest extends FormRequest
 {
     public function authorize(): bool
     {
