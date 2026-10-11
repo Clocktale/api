@@ -3,7 +3,7 @@
 namespace Tests\Unit\Services\User;
 
 use App\Models\User;
-use App\Services\User\UpdateUserService;
+use App\Services\User\UserService;
 use App\Repositories\Contracts\IUserRepository;
 use App\Http\RequestsValidations\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +32,7 @@ class UpdateUserServiceTest extends TestCase
 
 
 
-        /** @var \App\Repositories\Contracts\IUserRepository|\Mockery\MockInterface $userRepository */
+        /** @var IUserRepository&\Mockery\MockInterface $userRepository */
 
         $userRepository = Mockery::mock(IUserRepository::class);
 
@@ -41,7 +41,7 @@ class UpdateUserServiceTest extends TestCase
             ->with(Mockery::type(User::class))
             ->andReturnUsing(fn($user) => $user);
 
-        $service = new UpdateUserService($userRepository);
+        $service = new UserService($userRepository);
         
         $request = Mockery::mock(UpdateUserRequest::class);
 
@@ -49,7 +49,7 @@ class UpdateUserServiceTest extends TestCase
         $request->shouldReceive('filled')->andReturnUsing(fn($field) => isset($requestData[$field]));
         $request->shouldReceive('input')->andReturnUsing(fn($field) => $requestData[$field] ?? null);
 
-        $updatedUser = $service->execute($existingUser, $request);
+        $updatedUser = $service->update($existingUser, $request);
 
         $this->assertEquals('updatednick', $updatedUser->nickname);
         $this->assertEquals('updated@example.com', $updatedUser->email);

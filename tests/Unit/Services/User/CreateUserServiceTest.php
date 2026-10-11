@@ -3,7 +3,7 @@
 namespace Tests\Unit\Services\User;
 
 use App\Models\User;
-use App\Services\User\CreateUserService;
+use App\Services\User\UserService;
 use App\Repositories\Contracts\IUserRepository;
 use App\Http\RequestsValidations\StoreUserRequest;
 use Illuminate\Contracts\Cache\Store;
@@ -35,7 +35,7 @@ class CreateUserServiceTest extends TestCase
                 'password' => Hash::make($requestData['password'])
             ])));
 
-        $service = new CreateUserService($userRepository);
+        $service = new UserService($userRepository);
         // Mock de StoreUserRequest apenas para retornar validated()
 
         $request = Mockery::mock(StoreUserRequest::class);
@@ -43,7 +43,7 @@ class CreateUserServiceTest extends TestCase
         $request->shouldReceive('input')->andReturnUsing(fn($key) => $requestData[$key] ?? null);
 
         // Executa o serviço
-        $user = $service->execute($request);
+        $user = $service->create($request);
 
         // Assertions
         $this->assertInstanceOf(User::class, $user);
@@ -78,7 +78,7 @@ class CreateUserServiceTest extends TestCase
             'password' => 'Senha1233!rt',
         ];
 
-        /** @var \App\Http\RequestsValidations\StoreUserRequest $mock */
+        /** @var StoreUserRequest&\Mockery\MockInterface $mock */
 
         // Pega as regras, mas ignora 'unique' para teste unitário
 
@@ -105,7 +105,7 @@ class CreateUserServiceTest extends TestCase
             'password' => 'Senha1233!rt@',
         ];
 
-        /** @var \App\Http\RequestsValidations\StoreUserRequest $mock */
+        /** @var StoreUserRequest&\Mockery\MockInterface $mock */
         $mock = Mockery::mock(StoreUserRequest::class)
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();

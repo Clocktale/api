@@ -4,17 +4,18 @@ namespace App\Services\Studio;
 
 use App\Models\Studio;
 use App\Http\RequestsValidations\StoreStudioRequest;
+use App\Http\RequestsValidations\UpdateStudioRequest;
 use App\Repositories\Contracts\IStudioRepository;
 use App\Services\AzureStorageService;
 
-class CreateStudioService
+class StudioService
 {
     public function __construct(private IStudioRepository $studioRepository, private AzureStorageService $azureStorageService) 
     {
         $this->azureStorageService = new AzureStorageService();
     }
 
-    public function execute(StoreStudioRequest $request)
+    public function create(StoreStudioRequest $request)
     {
         // Pega apenas os dados validados do request
         $studio = $request->validated();
@@ -25,5 +26,21 @@ class CreateStudioService
         $data = new Studio($studio);
         
         return $this->studioRepository->createStudio($data);
+    }
+
+    public function update(Studio $studio, UpdateStudioRequest $request): Studio
+    {
+        // Pega apenas os dados validados ('name')
+        $data = $request->validated();
+
+        $studio->fill($data);
+
+        // Atualiza e retorna o estúdio (Critério 3)
+        return $this->studioRepository->updateStudio($studio);
+    }
+
+    public function delete(Studio $studio): bool
+    {
+        return $this->studioRepository->deleteStudio($studio);
     }
 }
