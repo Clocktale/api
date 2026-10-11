@@ -13,6 +13,6 @@ class Streamings extends Model
 
     public function contents()
     {
-        return $this->belongsToMany(Anime::class, 'anime_streamings', 'streaming_id', 'anime_id');
+        return $this->belongsToMany(Anime::class, 'anime_streaming', 'streaming_id', 'anime_id');
     }
 }

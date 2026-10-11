@@ -27,22 +27,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(function ($request, Throwable $e): bool {
             return $request->is('api/*') || $request->expectsJson();
         });
-    })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (Throwable $e, $request) {
-            
-            if ($e instanceof ModelNotFoundException) {
+
+        $exceptions->render(function (ModelNotFoundException $e, $request) {
+            if ($request->is('api/*') || $request->expectsJson()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Resource not found',
                 ], 404);
             }
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Internal server error',
-            ], 500);
         });
-        
     })
     ->create();

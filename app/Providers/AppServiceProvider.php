@@ -6,11 +6,13 @@ use App\Models\User;
 use App\Policies\UserPolicy;
 use App\Repositories\Contracts\IAnimeRepository;
 use App\Repositories\Contracts\IAuthorRepository;
+use App\Repositories\Contracts\ICategoryRepository;
 use App\Repositories\Contracts\IStreamingRepository;
 use App\Repositories\Contracts\IStudioRepository;
 use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\Eloquent\AnimeRepository;
 use App\Repositories\Eloquent\AuthorRepository;
+use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\StreamingRepository;
 use App\Repositories\Eloquent\StudioRepository;
 use App\Repositories\Eloquent\UserRepository;
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IAuthorRepository::class, AuthorRepository::class);
         $this->app->bind(IStreamingRepository::class, StreamingRepository::class);
         $this->app->bind(IAnimeRepository::class, AnimeRepository::class);
+        $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
     }
 
     /**

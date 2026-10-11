@@ -33,7 +33,6 @@ class UserService
         $data = Arr::only($request->validated(), ['nickname', 'username', 'email']);
         $data['password'] = Hash::make($request->input('password'));
         $data['role'] = 'user';
-        $data['profile_picture'] = 'profile_picture/default.jpeg';
 
         $user = new User($data);
 
@@ -48,8 +47,6 @@ class UserService
     public function update(User $user, UpdateUserRequest $request): User
     {
         $data = Arr::only($request->validated(), ['nickname', 'email', 'password']);
-        if ($request->filled('profile_picture'))
-            $data['profile_picture'] = $request->input('profile_picture');
         if ($request->filled('password'))
             $data['password'] = Hash::make($request->input('password'));
 

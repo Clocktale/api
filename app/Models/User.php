@@ -27,7 +27,6 @@ class User extends Authenticatable
         'username',
         'nickname',
         'email',
-        'profile_picture',
         'password',
     ];
 
@@ -48,7 +47,7 @@ class User extends Authenticatable
 
     public function preferredGenres()
     {
-        return $this->belongsToMany(Genders::class, 'preferences_has_genre', 'user_id', 'gender_id');
+        return $this->belongsToMany(Genders::class, 'preference_has_genre', 'user_id', 'gender_id');
     }
 
     public function starRatings()

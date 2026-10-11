@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Preferences extends Model
 {
-    protected $primarykey = 'user_id';
+    protected $primaryKey = 'user_id';
 
     public $incrementing = false;
 
     public function genders(){
-        return $this->belongsToMany(Genders::class, 'preferences_has_genre', 'user_id', 'gender_id');
+        return $this->belongsToMany(Genders::class, 'preference_has_genre', 'user_id', 'gender_id');
     }
 }

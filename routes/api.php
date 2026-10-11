@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StreamingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::prefix('/v1')->group(function () {
                 Route::delete('/streamings/{streaming}', [StreamingController::class, 'destroy']);
 
                 Route::post('/animes', [AnimeController::class, 'store']);
+
+                Route::post('/categories', [CategoryController::class, 'store']);
                 Route::put('/animes/{anime}', [AnimeController::class, 'update']);
                 Route::delete('/animes/{anime}', [AnimeController::class, 'destroy']);
             });
