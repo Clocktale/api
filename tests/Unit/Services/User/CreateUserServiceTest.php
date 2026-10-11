@@ -5,7 +5,7 @@ namespace Tests\Unit\Services\User;
 use App\Models\User;
 use App\Services\User\UserService;
 use App\Repositories\Contracts\IUserRepository;
-use App\Http\RequestsValidations\StoreUserRequest;
+use App\Http\RequestsValidations\UserRequest;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -36,9 +36,9 @@ class CreateUserServiceTest extends TestCase
             ])));
 
         $service = new UserService($userRepository);
-        // Mock de StoreUserRequest apenas para retornar validated()
+        // Mock de UserRequest apenas para retornar validated()
 
-        $request = Mockery::mock(StoreUserRequest::class);
+        $request = Mockery::mock(UserRequest::class);
         $request->shouldReceive('validated')->andReturn($requestData);
         $request->shouldReceive('input')->andReturnUsing(fn($key) => $requestData[$key] ?? null);
 
@@ -62,8 +62,8 @@ class CreateUserServiceTest extends TestCase
             'password' => 'Senha123@_34',
         ];
 
-        // Cria o validator usando as regras do StoreUserRequest
-        $rules = (new StoreUserRequest())->rules();
+        // Cria o validator usando as regras do UserRequest
+        $rules = (new UserRequest())->rules();
         $validator = Validator::make($invalidData, $rules);
 
         $this->assertTrue($validator->fails());
@@ -78,11 +78,11 @@ class CreateUserServiceTest extends TestCase
             'password' => 'Senha1233!rt',
         ];
 
-        /** @var StoreUserRequest&\Mockery\MockInterface $mock */
+        /** @var UserRequest&\Mockery\MockInterface $mock */
 
         // Pega as regras, mas ignora 'unique' para teste unitário
 
-        $mock = Mockery::mock(StoreUserRequest::class)->makepartial()->shouldAllowMockingProtectedMethods();
+        $mock = Mockery::mock(UserRequest::class)->makepartial()->shouldAllowMockingProtectedMethods();
         $rules = $mock->rules();
         unset($rules['username']);
         unset($rules['email']);
@@ -105,8 +105,8 @@ class CreateUserServiceTest extends TestCase
             'password' => 'Senha1233!rt@',
         ];
 
-        /** @var StoreUserRequest&\Mockery\MockInterface $mock */
-        $mock = Mockery::mock(StoreUserRequest::class)
+        /** @var UserRequest&\Mockery\MockInterface $mock */
+        $mock = Mockery::mock(UserRequest::class)
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 

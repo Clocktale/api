@@ -4,8 +4,7 @@ namespace App\Services\User;
 
 
 use Illuminate\Support\Facades\Hash;
-use App\Http\RequestsValidations\StoreUserRequest;
-use App\Http\RequestsValidations\UpdateUserRequest;
+use App\Http\RequestsValidations\UserRequest;
 use App\Models\UpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -24,10 +23,10 @@ class UserService
     /**
      * Handle the creation of a new user.
      *
-     * @param StoreUserRequest $request
+     * @param UserRequest $request
      * @return User
      */
-    public function create(StoreUserRequest $request): User
+    public function create(UserRequest $request): User
     {
         
         $data = Arr::only($request->validated(), ['nickname', 'username', 'email']);
@@ -41,10 +40,10 @@ class UserService
 
     /**
      * @param User $user
-     * @param UpdateUserRequest $request
+     * @param UserRequest $request
      * @return User
      */
-    public function update(User $user, UpdateUserRequest $request): User
+    public function update(User $user, UserRequest $request): User
     {
         $data = Arr::only($request->validated(), ['nickname', 'email', 'password']);
         if ($request->filled('password'))

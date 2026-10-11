@@ -5,7 +5,7 @@ namespace Tests\Unit\Services\User;
 use App\Models\User;
 use App\Services\User\UserService;
 use App\Repositories\Contracts\IUserRepository;
-use App\Http\RequestsValidations\UpdateUserRequest;
+use App\Http\RequestsValidations\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
@@ -43,7 +43,7 @@ class UpdateUserServiceTest extends TestCase
 
         $service = new UserService($userRepository);
         
-        $request = Mockery::mock(UpdateUserRequest::class);
+        $request = Mockery::mock(UserRequest::class);
 
         $request->shouldReceive('validated')->andReturn($requestData);
         $request->shouldReceive('filled')->andReturnUsing(fn($field) => isset($requestData[$field]));

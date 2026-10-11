@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\RequestsValidations\StoreUserRequest;
-use App\Http\RequestsValidations\UpdateUserRequest;
+use App\Http\RequestsValidations\UserRequest;
 use App\Models\User;
 use App\Repositories\Contracts\IUserRepository;
 use App\Services\User\UserService;
@@ -15,14 +14,14 @@ class UserController extends Controller
         private IUserRepository $userRepository
     ) {}
 
-    public function store(StoreUserRequest $request)
+    public function store(UserRequest $request)
     {
         $user = $this->userService->create($request);
 
         return $this->success($user, 'User created successfully.', 201);
     }
 
-    public function update(User $user, UpdateUserRequest $request)
+    public function update(User $user, UserRequest $request)
     {
         $this->authorize('update', $user);
         $updated = $this->userService->update($user, $request);
